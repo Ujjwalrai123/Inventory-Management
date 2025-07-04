@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Bills</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0; padding:0; background:#f4f6fb; font-family:'Segoe UI', Arial, sans-serif; min-height:100vh;">
+    <div style="background:#1976d2; color:#fff; padding:28px 0 16px 0; text-align:center; font-size:1.7rem; font-weight:600; letter-spacing:1px; box-shadow:0 2px 8px rgba(0,0,0,0.04);">Bill List</div>
+    <div style="max-width:900px; margin:38px auto; background:#fff; border-radius:14px; box-shadow:0 4px 24px rgba(25, 118, 210, 0.10); padding:32px 28px 24px 28px;">
+        <div style="overflow-x:auto;">
+            <table style="width:100%; border-collapse:collapse; background:#f8fafc; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(25,118,210,0.04);">
+                <thead>
+                    <tr style="background:#e3f0fd; color:#1976d2; font-weight:600;">
+                        <th style="padding:12px 10px;">Bill ID</th>
+                        <th style="padding:12px 10px;">Customer</th>
+                        <th style="padding:12px 10px;">Total Amount</th>
+                        <th style="padding:12px 10px;">Bill Date</th>
+                        <th style="padding:12px 10px;">Download</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="bill : ${bills}" style="background:#fff; transition:background 0.2s;">
+                        <td th:text="${bill.id}" style="padding:10px 8px; border-bottom:1px solid #e3f0fd;"></td>
+                        <td th:text="${bill.customerName}" style="padding:10px 8px; border-bottom:1px solid #e3f0fd;"></td>
+                        <td th:text="${bill.totalAmount}" style="padding:10px 8px; border-bottom:1px solid #e3f0fd;"></td>
+                        <td th:text="${bill.billDate}" style="padding:10px 8px; border-bottom:1px solid #e3f0fd;"></td>
+                        <td style="padding:10px 8px; border-bottom:1px solid #e3f0fd;">
+                            <a th:href="@{'/api/billing/invoice/' + ${bill.id}}" style="color:#1976d2; text-decoration:none; font-weight:500;">Download PDF</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="margin-top:22px;text-align:center;">
+            <a th:href="@{/dashboard}" style="color:#1976d2; text-decoration:none; font-weight:500; font-size:1rem;">&larr; Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html> 

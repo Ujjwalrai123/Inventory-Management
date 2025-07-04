@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Billing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0; padding:0; background:#f4f6fb; font-family:'Segoe UI', Arial, sans-serif; min-height:100vh;">
+    <div style="background:#1976d2; color:#fff; padding:28px 0 16px 0; text-align:center; font-size:1.7rem; font-weight:600; letter-spacing:1px; box-shadow:0 2px 8px rgba(0,0,0,0.04);">Billing</div>
+    <div style="max-width:400px; margin:38px auto; background:#fff; border-radius:14px; box-shadow:0 4px 24px rgba(25, 118, 210, 0.10); padding:32px 28px 24px 28px;">
+        <form th:action="@{/billing}" method="post" style="display:flex; flex-direction:column; gap:16px;">
+            <label for="product" style="font-weight:500; color:#333;">Product:</label>
+            <select id="product" name="productId" required style="padding:10px 12px; border:1px solid #bfc9d9; border-radius:6px; font-size:1rem; outline:none; background:#f8fafc; color:#333;">
+                <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+            </select>
+
+            <label for="quantity" style="font-weight:500; color:#333;">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" required style="padding:10px 12px; border:1px solid #bfc9d9; border-radius:6px; font-size:1rem; outline:none; transition:border 0.2s;">
+
+            <label for="customerName" style="font-weight:500; color:#333;">Customer Name:</label>
+            <input type="text" id="customerName" name="customerName" required style="padding:10px 12px; border:1px solid #bfc9d9; border-radius:6px; font-size:1rem; outline:none; transition:border 0.2s;">
+
+            <button type="submit" style="background:#1976d2; color:#fff; border:none; border-radius:6px; padding:12px 0; font-size:1.08rem; font-weight:600; cursor:pointer; margin-top:8px; transition:background 0.2s;">Generate Bill</button>
+        </form>
+        <div style="margin-top:22px;text-align:center;">
+            <a th:href="@{/dashboard}" style="color:#1976d2; text-decoration:none; font-weight:500; font-size:1rem;">&larr; Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html> 
