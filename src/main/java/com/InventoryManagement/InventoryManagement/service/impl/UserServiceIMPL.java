@@ -65,7 +65,7 @@ public class UserServiceIMPL implements UserService {
     public boolean registerUser(UserRequest userRequest) {
         // Check if user already exists by username or email
         if (userRepository.findByUserName(userRequest.getUserName()).isPresent() ||
-            userRepository.findByEmail(userRequest.getEmail()).isPresent()) {
+                userRepository.findByEmail(userRequest.getEmail()).isPresent()) {
             return false;
         }
         UserBE user = new UserBE();
@@ -75,9 +75,11 @@ public class UserServiceIMPL implements UserService {
         String roleStr = userRequest.getRole();
         Role role = Role.ROLE_USER;
         if (roleStr != null && !roleStr.isEmpty()) {
-            try {
-                role = Role.valueOf(roleStr);
-            } catch (IllegalArgumentException ignored) {}
+            if (roleStr.equalsIgnoreCase("admin") || roleStr.equalsIgnoreCase("ROLE_ADMIN")) {
+                role = Role.ROLE_ADMIN;
+            } else if (roleStr.equalsIgnoreCase("user") || roleStr.equalsIgnoreCase("ROLE_USER")) {
+                role = Role.ROLE_USER;
+            }
         }
         user.setRole(role);
         userRepository.save(user);
